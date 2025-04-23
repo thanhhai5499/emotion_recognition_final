@@ -76,29 +76,15 @@ class UserDataCollectionApp:
 
             self.logo_label = Label(self.root, image=self.icon_photo, bg=self.BG_COLOR)
             self.logo_label.place(x=20, y=20)
-            
-            # Logo phải
-            self.right_logo_image = Image.open("assets/logo2.png")
-            self.right_logo_image_resized = self.right_logo_image.resize((380, 100), Image.LANCZOS)
-            self.right_logo_photo = ImageTk.PhotoImage(self.right_logo_image_resized)
-            self.right_logo_label = Label(self.root, image=self.right_logo_photo, bg=self.BG_COLOR)
-            self.right_logo_label.place(x=self.screen_width-400, y=10)
+
         except Exception as e:
             print(f"Lỗi khi tải logo: {e}")
 
-        # Tiêu đề và tên công ty
-        self.management_company_label = Label(
-            self.root, 
-            text="BAN QUẢN LÝ KHU CÔNG NGHỆ CAO THÀNH PHỐ HỒ CHÍ MINH", 
-            font=("Helvetica", 26, "bold"), 
-            fg=self.COMPANY_COLOR, 
-            bg=self.BG_COLOR
-        )
-        self.management_company_label.place(relx=0.5, rely=0.05, anchor=tk.CENTER)
+
         
         self.company_label = Label(
             self.root, 
-            text="TRUNG TÂM NGHIÊN CỨU TRIỂN KHAI KHU CÔNG NGHỆ CAO", 
+            text="TRƯỜNG TRUNG HỌC PHỔ THÔNG CHUYÊN TRẦN ĐẠI NGHĨA", 
             font=("Helvetica", 26, "bold"), 
             fg=self.COMPANY_COLOR, 
             bg=self.BG_COLOR

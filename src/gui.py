@@ -82,36 +82,20 @@ class EmotionRecognitionApp:
         # Logo trái
         try:
             self.icon_image = Image.open("assets/Logo.png")
-            self.icon_image_resized = self.icon_image.resize((200, 200), Image.LANCZOS)
+            self.icon_image_resized = self.icon_image.resize((180, 180), Image.LANCZOS)
             self.icon_photo = ImageTk.PhotoImage(self.icon_image_resized)
             self.root.iconphoto(False, self.icon_photo)
             
             self.logo_label = Label(self.root, bg=self.BG_COLOR)
             self.logo_label.pack(side="top", anchor="nw", padx=10, pady=2)
             self._display_large_logo()
-            
-            # Logo phải
-            self.right_logo_image = Image.open("assets/logo2.png")
-            self.right_logo_image_resized = self.right_logo_image.resize((380, 100), Image.LANCZOS)
-            self.right_logo_photo = ImageTk.PhotoImage(self.right_logo_image_resized)
-            self.right_logo_label = Label(self.root, image=self.right_logo_photo, bg=self.BG_COLOR)
-            self.right_logo_label.place(x=self.root.winfo_screenwidth()-400, y=10)
+
         except Exception as e:
             print(f"Lỗi khi tải logo: {e}")
-            
-        # Tiêu đề và tên công ty
-        self.management_company_label = Label(
-            self.root, 
-            text="BAN QUẢN LÝ KHU CÔNG NGHỆ CAO THÀNH PHỐ HỒ CHÍ MINH", 
-            font=("Helvetica", 26, "bold"), 
-            fg=self.COMPANY_COLOR, 
-            bg=self.BG_COLOR
-        )
-        self.management_company_label.place(relx=0.5, rely=0.05, anchor=tk.CENTER)
         
         self.company_label = Label(
             self.root, 
-            text="TRUNG TÂM NGHIÊN CỨU TRIỂN KHAI KHU CÔNG NGHỆ CAO", 
+            text="TRƯỜNG TRUNG HỌC PHỔ THÔNG CHUYÊN TRẦN ĐẠI NGHĨA", 
             font=("Helvetica", 26, "bold"), 
             fg=self.COMPANY_COLOR, 
             bg=self.BG_COLOR
@@ -316,7 +300,7 @@ class EmotionRecognitionApp:
     def _display_large_logo(self):
         """Hiển thị logo lớn ở góc trên trái"""
         try:
-            large_logo_image = self.icon_image.resize((200, 200), Image.LANCZOS)
+            large_logo_image = self.icon_image.resize((180, 180), Image.LANCZOS)
             large_logo_photo = ImageTk.PhotoImage(large_logo_image)
             self.logo_label.config(image=large_logo_photo)
             self.logo_label.image = large_logo_photo

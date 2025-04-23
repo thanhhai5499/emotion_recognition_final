@@ -46,31 +46,14 @@ class FaceRecognitionLoginApp:
             self.logo_label.pack(side="top", anchor="nw", padx=10, pady=10)
             self.display_large_logo()
 
-            # Logo phải
-            self.right_logo_image = Image.open("assets/logo2.png")
-            self.right_logo_image_resized = self.right_logo_image.resize((380, 100), Image.LANCZOS)
-            self.right_logo_photo = ImageTk.PhotoImage(self.right_logo_image_resized)
-            self.right_logo_label = Label(self.root, image=self.right_logo_photo, bg=self.SCREEN_BG)
-            self.right_logo_label.place(x=self.root.winfo_screenwidth()-400, y=10)
         except Exception as e:
             print(f"Lỗi khi tải logo: {e}")
 
     def create_labels(self):
-        """Tạo các nhãn văn bản"""
-        # Nhãn công ty quản lý
-        self.management_company_label = Label(
-            self.root,
-            text="BAN QUẢN LÝ KHU CÔNG NGHỆ CAO THÀNH PHỐ HỒ CHÍ MINH",
-            font=("Helvetica", 26, "bold"),
-            fg="#FF0000",
-            bg=self.SCREEN_BG
-        )
-        self.management_company_label.place(relx=0.5, rely=0.05, anchor=tk.CENTER)
-        
         # Nhãn trung tâm
         self.company_label = Label(
             self.root,
-            text="TRUNG TÂM NGHIÊN CỨU TRIỂN KHAI KHU CÔNG NGHỆ CAO",
+            text="TRƯỜNG TRUNG HỌC PHỔ THÔNG CHUYÊN TRẦN ĐẠI NGHĨA",
             font=("Helvetica", 26, "bold"),
             fg="#FF0000",
             bg=self.SCREEN_BG
