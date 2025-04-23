@@ -1,0 +1,17 @@
+numpy
+pandas
+scikit-learn
+tensorflow
+keras
+dlib
+opencv-python-headless
+Pillow
+pyrealsense2
+tk
+keras-facenet
+scipy
+pyserial
+SpeechRecognition
+gtts
+pygame
+pyaudio

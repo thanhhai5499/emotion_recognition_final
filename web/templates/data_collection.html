@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0088d1',
+                        title: '#3366cc',
+                        company: '#FF0000',
+                        success: '#4CAF50',
+                        danger: '#f44336',
+                        warning: '#FF9800',
+                        normal: '#333333',
+                        abnormal: '#FF5722'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .video-container {
+            aspect-ratio: 16/9;
+            background-color: #000;
+        }
+        .status-box {
+            height: 36px;
+            line-height: 30px;
+        }
+        .video-frame {
+            border: 1px solid #0088d1;
+        }
+        .input-label {
+            background-color: #0088d1;
+            color: white;
+            width: 252px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .input-field {
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 0 8px;
+        }
+        .progress-bar {
+            height: 20px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        .progress-fill {
+            height: 100%;
+            background-color: #4CAF50;
+            width: 0%;
+            transition: width 0.5s;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-2 max-w-screen-xl">
+        <!-- Header -->
+        <header class="flex items-start justify-between mb-4">
+            <!-- Left Logo -->
+            <div class="flex-shrink-0 ml-2">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="h-40 w-40 object-contain">
+            </div>
+            
+            <!-- Center Titles -->
+            <div class="flex flex-col items-center justify-center mt-4">
+                <h1 class="text-2xl md:text-3xl font-bold text-center text-company mb-1">BAN QUẢN LÝ KHU CÔNG NGHỆ CAO THÀNH PHỐ HỒ CHÍ MINH</h1>
+                <h2 class="text-xl md:text-2xl font-bold text-center text-company mb-3">TRUNG TÂM NGHIÊN CỨU TRIỂN KHAI KHU CÔNG NGHỆ CAO</h2>
+                <h3 class="text-xl md:text-2xl font-bold text-center text-title">HỆ THỐNG GIÁM SÁT QUÁ TRÌNH TẬP LUYỆN</h3>
+                <p class="text-lg font-bold text-normal mt-3">Thu Thập Dữ Liệu Khuôn Mặt</p>
+            </div>
+            
+            <!-- Right Logo -->
+            <div class="flex-shrink-0 mr-2">
+                <img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Logo 2" class="h-24 w-80 object-contain">
+            </div>
+        </header>
+        
+        <!-- Main Content -->
+        <div class="flex flex-col md:flex-row gap-6">
+            <!-- Left Section - Video Feed -->
+            <div class="w-full md:w-1/2">
+                <div class="video-frame bg-gray-100 p-1">
+                    <div class="video-container overflow-hidden">
+                        <img src="{{ url_for('data_collection_feed') }}" alt="Data Collection Feed" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                
+                <div class="mt-4 text-center">
+                    <div class="progress-bar">
+                        <div id="progress-fill" class="progress-fill"></div>
+                    </div>
+                    <p id="capture-count" class="mt-2 text-normal font-semibold">Đã chụp: 0/30</p>
+                </div>
+            </div>
+            
+            <!-- Right Section - User Data Form -->
+            <div class="w-full md:w-1/2">
+                <div class="bg-white p-6 rounded shadow-md">
+                    <h4 class="text-xl font-bold mb-4 text-title">Thông Tin Người Dùng</h4>
+                    
+                    <div class="space-y-4">
+                        <!-- User ID -->
+                        <div class="flex items-center">
+                            <div class="input-label h-10 flex items-center justify-center">Mã người dùng</div>
+                            <input type="text" id="user-id" class="input-field h-10 flex-grow" placeholder="Nhập mã người dùng">
+                        </div>
+                        
+                        <!-- User Name -->
+                        <div class="flex items-center">
+                            <div class="input-label h-10 flex items-center justify-center">Họ và tên</div>
+                            <input type="text" id="user-name" class="input-field h-10 flex-grow" placeholder="Nhập họ và tên">
+                        </div>
+                        
+                        <!-- User Age -->
+                        <div class="flex items-center">
+                            <div class="input-label h-10 flex items-center justify-center">Tuổi</div>
+                            <input type="number" id="user-age" class="input-field h-10 flex-grow" placeholder="Nhập tuổi">
+                        </div>
+                        
+                        <!-- User Gender -->
+                        <div class="flex items-center">
+                            <div class="input-label h-10 flex items-center justify-center">Giới tính</div>
+                            <select id="user-gender" class="input-field h-10 flex-grow">
+                                <option value="">Chọn giới tính</option>
+                                <option value="male">Nam</option>
+                                <option value="female">Nữ</option>
+                                <option value="other">Khác</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="flex justify-between mt-8">
+                        <button id="btn-start-capture" class="bg-success text-white py-2 px-4 border border-success font-bold">
+                            Bắt Đầu Thu Thập
+                        </button>
+                        <button id="btn-save" class="bg-primary text-white py-2 px-4 border border-primary font-bold" disabled>
+                            Lưu Dữ Liệu
+                        </button>
+                        <button id="btn-back" class="bg-danger text-white py-2 px-4 border border-danger font-bold">
+                            Quay Lại
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Message Box -->
+                <div class="mt-4 border border-gray-300 bg-white p-2">
+                    <div id="message-box" class="text-center text-lg font-semibold text-normal">
+                        Nhập thông tin và bắt đầu thu thập dữ liệu
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="mt-8 py-3 text-center text-gray-600 border-t border-gray-200">
+            <p>© 2023 Hệ Thống Giám Sát Quá Trình Tập Luyện. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const startCaptureBtn = document.getElementById('btn-start-capture');
+            const saveBtn = document.getElementById('btn-save');
+            const backBtn = document.getElementById('btn-back');
+            const messageBox = document.getElementById('message-box');
+            const progressFill = document.getElementById('progress-fill');
+            const captureCount = document.getElementById('capture-count');
+            
+            let isCapturing = false;
+            let capturedImages = 0;
+            const totalImages = 30;
+            
+            // Start capturing images
+            startCaptureBtn.addEventListener('click', function() {
+                const userId = document.getElementById('user-id').value;
+                const userName = document.getElementById('user-name').value;
+                
+                if (!userId || !userName) {
+                    messageBox.textContent = 'Vui lòng nhập mã người dùng và họ tên!';
+                    messageBox.style.color = '#f44336';
+                    return;
+                }
+                
+                if (isCapturing) {
+                    // Stop capturing
+                    isCapturing = false;
+                    startCaptureBtn.textContent = 'Bắt Đầu Thu Thập';
+                    messageBox.textContent = 'Đã dừng thu thập dữ liệu';
+                    return;
+                }
+                
+                // Start capturing
+                isCapturing = true;
+                capturedImages = 0;
+                progressFill.style.width = '0%';
+                captureCount.textContent = `Đã chụp: 0/${totalImages}`;
+                startCaptureBtn.textContent = 'Dừng Thu Thập';
+                messageBox.textContent = 'Đang thu thập dữ liệu khuôn mặt...';
+                messageBox.style.color = '#333333';
+                
+                // Simulate image capture
+                simulateCapture();
+            });
+            
+            // Simulate capturing images
+            function simulateCapture() {
+                if (!isCapturing) return;
+                
+                if (capturedImages < totalImages) {
+                    capturedImages++;
+                    const progress = (capturedImages / totalImages) * 100;
+                    progressFill.style.width = `${progress}%`;
+                    captureCount.textContent = `Đã chụp: ${capturedImages}/${totalImages}`;
+                    
+                    setTimeout(simulateCapture, 500); // Capture every 0.5 seconds
+                } else {
+                    // Completed capturing
+                    isCapturing = false;
+                    startCaptureBtn.textContent = 'Bắt Đầu Thu Thập';
+                    messageBox.textContent = 'Thu thập dữ liệu hoàn tất. Nhấn "Lưu Dữ Liệu" để tiếp tục!';
+                    messageBox.style.color = '#4CAF50';
+                    saveBtn.disabled = false;
+                }
+            }
+            
+            // Save user data
+            saveBtn.addEventListener('click', function() {
+                const userId = document.getElementById('user-id').value;
+                const userName = document.getElementById('user-name').value;
+                const userAge = document.getElementById('user-age').value;
+                const userGender = document.getElementById('user-gender').value;
+                
+                if (!userId || !userName) {
+                    messageBox.textContent = 'Vui lòng nhập mã người dùng và họ tên!';
+                    messageBox.style.color = '#f44336';
+                    return;
+                }
+                
+                // Disable button to prevent multiple clicks
+                saveBtn.disabled = true;
+                saveBtn.textContent = 'Đang lưu...';
+                
+                // API call to save user data
+                fetch('/api/save_user_data', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        user_name: userName,
+                        age: userAge,
+                        gender: userGender
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        messageBox.textContent = data.message;
+                        messageBox.style.color = '#4CAF50';
+                        
+                        // Redirect to main app
+                        setTimeout(() => {
+                            window.location.href = data.redirect;
+                        }, 2000);
+                    } else {
+                        messageBox.textContent = data.message;
+                        messageBox.style.color = '#f44336';
+                        saveBtn.disabled = false;
+                        saveBtn.textContent = 'Lưu Dữ Liệu';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error saving user data:', error);
+                    messageBox.textContent = 'Lỗi khi lưu dữ liệu!';
+                    messageBox.style.color = '#f44336';
+                    saveBtn.disabled = false;
+                    saveBtn.textContent = 'Lưu Dữ Liệu';
+                });
+            });
+            
+            // Back button
+            backBtn.addEventListener('click', function() {
+                window.location.href = '/login';
+            });
+        });
+    </script>
+</body>
+</html> 

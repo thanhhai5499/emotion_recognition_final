@@ -1,0 +1,29 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# Data and models too large for git
+data/
+
+# IDE specific files
+.vscode/
+.idea/
+
+# Compiled Python bytecode
+src/__pycache__/
+test/__pycache__/
+
+# Logs
+*.log
+
+# OS specific
+.DS_Store
+Thumbs.db 
